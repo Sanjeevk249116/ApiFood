@@ -29,8 +29,15 @@ app.use(morgan("dev"));
 app.use("/api/users", userRoutes);
 app.use("/api/notes", notesRoutes);
 
+
 // Start server
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {
     console.log(`Server running on PORT ${PORT}`);
 });
+
+app.use((req, res) => {
+    return res
+      .status(400)
+      .json({message: "The requested url is not found."});
+  });
